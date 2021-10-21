@@ -24,6 +24,30 @@ class MessageService{
         this.messages.push(message);
         return message;
     }
+    async remove(index){
+        //erro pop só tira o último cara
+        const message = this.messages.pop(index)
+        return message
+
+        /*procurar o id, retornar o objeto todo sem o id
+        meuJSON = meuJSON.filter(function(jsonObject) {
+            return jsonObject[chave] != valor;
+        });
+        this.messages = removerPela(index,'id', this.messages)*/
+        //this.messages[index]
+    
+        /*
+        let newMessage
+        this.messages.forEach(element => {
+            if(element.id != index)
+                newMessage.push(element)
+        });
+
+        this.messages = newMessage
+        return newMessage*/
+    }
+
+
 
     //find    GET   /messages
     //get    GET    /messages/1
@@ -32,6 +56,9 @@ class MessageService{
     //patch  PATCH  /messages/1
     //remove DELETE /messages/1
 }
+
+
+
 
 /*//expor service a uma api, expor a api em web sockets parar ter uma aplicação em tempo real*/
 const app = express(feathers())

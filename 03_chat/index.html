@@ -27,6 +27,10 @@
         <input type="text" placeholder="Enter a Message" id="message-text" />
         <button type="submit" class="button button-primary">Send a message</button>
       </form>
+      <form class="form" onsubmit="deleteMessage(event.preventDefault())">
+        <input type="text" placeholder="Enter a Message" id="message-remove" />
+        <button type="submit" class="button button-primary">Delete última msg</button>
+      </form>
     </div>
     <div id="message-list"></div>
   </main>
@@ -39,14 +43,26 @@
           await app.service("messages").create({text:messageInput.value})
           messageInput.value = ""
       }
+      const deleteMessage = async()=>{
+          const messageRemove = document.getElementById("message-remove")
+          await app.service("messages").remove(messageRemove.value)
+          messageRemove.value = ""
+      }
       const addMessage = (message) => {
         document.getElementById("message-list").innerHTML += `<p>${message.text}</p>`
       }
+      const remMessage = async (message) => {
+        document.getElementById("message-list").innerHTML = `<p>Removido: ${message.text}</p>`
+        const messages =  await app.service("messages").find()    
+        messages.forEach(addMessage)
+      }
+
       const main = async () =>{
         const messages =  await app.service("messages").find()
         messages.forEach(addMessage)
 
         app.service("messages").on("created", addMessage) //socket connection
+        app.service("messages").on("removed", remMessage)
       }
       main()
     </script>
