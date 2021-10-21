@@ -1,0 +1,13 @@
+npm init -y
+npm install @feathersjs/feathers @feathersjs/express @feathersjs/socketio
+
+mkdir hello-feathers
+cd hello-feathers
+feathers generate app
+
+nodemon no start em package json
+index.js <main> para interface
+
+## fazer o desafio
+1:03:00
+https://www.youtube.com/watch?v=j_HT-DPivAg&list=PLiHjc2SceL-FMdY2KTZ7lLfrwZ1T3u2vs&index=61&t=649s
